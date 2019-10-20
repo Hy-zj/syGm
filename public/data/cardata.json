@@ -1,0 +1,31 @@
+{
+  "code": 0,
+  "data": {
+    "message": [
+      {
+       "id": "001",
+       "title": "华为手机",
+       "price": "1299",
+       "selected": false,
+       "imgurl": "https://img12.gomein.net.cn/image/prodimg/gicon/cat10000062.png",
+       "count": "1"
+      },
+      {
+        "id": "002",
+        "title": "小米手机",
+        "price": "1299",
+        "selected": false,
+        "imgurl": "https://img12.gomein.net.cn/image/prodimg/gicon/cat10000062.png",
+        "count": "1"
+       },
+       {
+        "id": "003",
+        "title": "苹果手机",
+        "price": "1299",
+        "selected": false,
+        "imgurl": "https://img12.gomein.net.cn/image/prodimg/gicon/cat10000062.png",
+        "count": "1"
+       }
+    ]
+  }
+}
