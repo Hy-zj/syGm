@@ -3,7 +3,7 @@
     <div class="product_share_top">
       <div class="product_share_left">
         <div class="slfe_icon">自营</div>
-        <p>Apple Macbook Air 13.3 Core i5 8G 128G SSD 苹果笔记本电脑 轻薄本 银色 MQD32CH/A</p>
+        <p>{{$route.params.desc}}</p>
       </div>
       <div class="product_share_right">
         <img

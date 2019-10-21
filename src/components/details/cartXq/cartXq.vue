@@ -38,7 +38,7 @@
               <div class="cartXq-main-shop-list-top">
                 <div class="cartXq-main-shop-list-top-left">
                   <!-- 定义上屏的状态然后添加change事件并传递商品id和状态 -->
-                  <van-checkbox @change="selectedChanged(item.id,$store.getters.getGoodsSelected[item.id])" v-model="$store.getters.getGoodsSelected[item.id]" class="checkbox" checked-color="red"></van-checkbox>
+                  <van-checkbox  @click="selectedChanged(item.id,$store.getters.getGoodsSelected[item.id])" :value="$store.getters.getGoodsSelected[item.id]" class="checkbox" checked-color="red"></van-checkbox>
                 </div>
                 <div class="cartXq-main-shop-list-top-right">
                   <div class="cartXq-main-shop-list-top-right-left">
@@ -47,7 +47,7 @@
                   <div class="cartXq-main-shop-list-top-right-right">
                     <div
                       class="cartXq-main-shop-list-top-right-right-one"
-                    >【限量1000件】美容仪V脸美容神器滚轮脸部3D滚轮微电流按摩器咬肌双下巴提拉紧致面部太阳能微电流脸仪棒美容夹(银色)</div>
+                    >{{item.desc}}</div>
                     <div class="cartXq-main-shop-list-top-right-right-two">{{item.title}}</div>
                     <div class="cartXq-main-shop-list-top-right-right-tree">限购99件</div>
                     <div class="cartXq-main-shop-list-top-right-right-four">
@@ -75,8 +75,8 @@
       </div>
 
       <div class="cartXq-footer">
-          <van-submit-bar :price="$store.getters.getGoodsCountAndAmount.amount" button-text="提交订单" @submit="onSubmit">
-            <van-checkbox class="checkbox" checked-color="red">全选</van-checkbox>
+          <van-submit-bar :price="$store.getters.getGoodsCountAndAmount.amount*100" button-text="提交订单" @submit="onSubmit">
+            <van-checkbox ref="allselected" class="checkbox" checked-color="red" @click="allChange">全选</van-checkbox>
           </van-submit-bar>
       </div>
     </div>
@@ -104,7 +104,6 @@ export default {
       tab: false,
       //购物车的商品数据
       goodsList: [
-        {}
       ]
     };
   },
@@ -133,7 +132,7 @@ export default {
     },
     onSubmit() {},
     change() {
-      this.$router.back();
+      this.$router.push('/searchList');
     },
     toggle() {
       this.tab = !this.tab;
@@ -151,11 +150,19 @@ export default {
       }
       // console.log('1111111')
       //获取购物车上屏列表
-      Vue.axios.get('/data/cardata.json'+ idArr.join(",")).then((response) => {
-        console.log(response)
+      //+ idArr.join(",")
+      //对加入购物车的产品进行赛选
+      Vue.axios.get('/data/cardata.json').then((response) => {
+        // console.log(response.data.data.message)
         if (response.data.code === 0) {
-          this.goodsList = response.data.data
-          console.log(this.goodsList)
+          response.data.data.message.some((item,index)=>{
+            console.log(item.id)
+            console.log(idArr)
+            if ( idArr.join(",").includes(item.id)) {
+              this.goodsList.push(item)
+              console.log(this.goodsList)
+            }
+          })
         }
       })
     },
@@ -168,15 +175,24 @@ export default {
     },
     //定义单选事件
     selectedChanged(id,val){
+      console.log(val)
+      val = !val
       this.$store.commit('updataGoodsSelected',{
         id,selected: val
       })
+    },
+    //定义全选点击事件
+    allChange(){
+      console.log(this.$refs.allselected)
     }
   },
   created() {
     window.addEventListener("scroll", this.scollTop);
     //调用获取购物车商品数据的方法
     this.getGoodsList()
+  },
+  mounted(){
+    // console.log(this.$store.getters.getGoodsSelected[item.id])
   }
 };
 </script>
@@ -287,15 +303,15 @@ export default {
   overflow: hidden;
   font-size: 12px;
   color: #333;
-  height: 40px;
+  height: 60px;
 }
 .cartXq-main-shop-list-top-right-right-two {
-  height: 19px;
+  height: 14px;
   font-size: 12px;
   color: #333;
   margin-top: 5px;
   background: #f3f5f7;
-  width: 25px;
+  width: 60px;
   text-align: center;
 }
 .cartXq-main-shop-list-top-right-right-tree {

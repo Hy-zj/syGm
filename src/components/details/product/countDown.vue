@@ -2,7 +2,7 @@
   <div class="product_count_down">
     <div class="product_count_down_left">
       ￥
-      <span>6288</span>
+      <span>{{$route.params.price}}</span>
     </div>
     <div class="product_count_down_middle">
       <p>

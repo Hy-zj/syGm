@@ -57,7 +57,7 @@
         </div>
       </div>
     </div>
-    <component v-bind:is="currentTabComponent"></component>
+    <component :item="$store.state.itemList" v-bind:is="currentTabComponent"></component>
   </div>
 </template>
 
@@ -116,21 +116,31 @@ export default {
       console.log(this.$refs.headertwo.removeAttribute("color"));
     },
     scrollToTop() {
-    //   const that = this;
-    //   let scrollTop = window.pageYOffset;
-    //   //  ||
-    //   // document.documentElement.scrollTop ||
-    //   // document.body.scrollTop;
-    //   that.scrollTop = scrollTop;
-    //   if (that.scrollTop > 85) {
-    //       document.querySelector(".searchList-main-header").style.position = "fixed";
-    //       document.querySelector(".searchList-main-header").style.top = 0;
-    //   } 
-    //   if (that.scrollTop == 0) {
-    //       document.querySelector(".searchList-main-header").style.position ="static";
-    //       document.querySelector(".searchList-main-header").style.top = 0;
-    //     }
-      
+      const that = this;
+      let scrollTop = window.pageYOffset;
+      //  ||
+      // document.documentElement.scrollTop ||
+      // document.body.scrollTop;
+      that.scrollTop = scrollTop;
+      if (that.scrollTop > 85) {
+        var NUM = document.querySelector(".searchList-main-header");
+        if (NUM) {
+          document.querySelector(".searchList-main-header").style.position =
+            "fixed";
+          document.querySelector(".searchList-main-header").style.top = 0;
+        }
+      }
+      if (that.scrollTop == 0) {
+        var NUM = document.querySelector(".searchList-main-header");
+        if (NUM) {
+          document.querySelector(".searchList-main-header").style.position =
+            "static";
+          document.querySelector(".searchList-main-header").style.top = 0;
+        }
+      }
+    },
+    getdataList() {
+      this.$store.commit("getdata");
     }
   },
   mounted() {
@@ -142,7 +152,12 @@ export default {
 
     //往下划效果
     window.addEventListener("scroll", this.scrollToTop);
-    console.log(this.$refs.searchList.style.position="fixed")
+    console.log((this.$refs.searchList.style.position = "fixed"));
+    //store.dispatch('increment')
+  },
+  created() {
+    //调用方法获取数据
+    this.getdataList();
   }
 };
 </script>

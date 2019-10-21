@@ -1,7 +1,7 @@
 <template>
   <div class="product_swiper">
     <van-swipe @change="onChange">
-      <van-swipe-item><img src="https://gfs17.gomein.net.cn/T1NOWjBvYv1RCvBVdK_400.jpg?v=20170727" alt=""></van-swipe-item>
+      <van-swipe-item><img :src="$route.params.imgurl" alt=""></van-swipe-item>
       <van-swipe-item><img src="https://gfs13.gomein.net.cn/T1GrJbBjbT1RCvBVdK_400.jpg?v=20170727" alt=""></van-swipe-item>
       <van-swipe-item><img src="https://gfs11.gomein.net.cn/T1hQEbB_Lv1RCvBVdK_400.jpg?v=20170727" alt=""></van-swipe-item>
       <van-swipe-item><img src="https://gfs12.gomein.net.cn/T1CG_jBjWT1RCvBVdK_400.jpg?v=20170727" alt=""></van-swipe-item>

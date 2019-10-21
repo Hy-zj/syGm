@@ -19,18 +19,16 @@
         icon="cart-o"
         size="23px"
         text="购物车"
-        @click="onClickIcon"
-        info=""
+        @click="$router.push('/cartXq')"
+        :info="$store.getters.getAllCount"
         class="detail_footer_icon"
       />
-     <router-link to="/cartXq">
         <van-goods-action-button
         type="warning"
         text="加入购物车"
-        @click="onClickButton"
+        @click="addToShopCar"
         class="detail_footer_btn"
       />
-     </router-link>
       <van-goods-action-button
         type="danger"
         color="#FA1E8C"
@@ -66,17 +64,23 @@ export default {
     onClickIcon() {},
     //添加到购物车
     addToShopCar(){
-      this.ballFlag = !this.ballFlag
+      // this.ballFlag = !this.ballFlag
+      //只携带信息
       var goodsInfo = {
-        id: this.id,
-        count : this.selectedCount,
-        price: this.goodsInfo.sell_price,
+        // id: this.id,
+        // count : this.selectedCount,
+        // price: this.goodsInfo.sell_price,
+        // selected: true
+        id: this.$route.params.userId,
+        count: this.$route.params.count,
+        price: this.$route.params.price,
+        imgurl: this.$route.params.imgurl,
         selected: true
       }
       //调用方法把商品添加到购物车
       this.$store.commit('addToCar',goodsInfo)
     }
-  }
+  },
 };
 </script>
 

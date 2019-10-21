@@ -40,7 +40,8 @@ export default new Router({
       component: loginMy
     },
     {
-      path: '/detail',
+      path: '/detail/:userId/:name:price:desc:count:imgurl',
+      name: 'detail',
       component: detail
     },
     {

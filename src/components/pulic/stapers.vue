@@ -2,7 +2,9 @@
   <div>
     <div class="stapers">
       <button class="stapers-button" type="button" @click="del">-</button>
-      <input type="text" @change="countChange" ref="numbox" :value="initcount" />
+      <input type="text" @change="countChange" ref="numbox" :value="initcount"/>
+      <!-- <span>{{initcount}}</span> -->
+        <!-- :value="initcount" -->
       <button class="stapers-button" type="button" @click="add">+</button>
     </div>
   </div>
@@ -16,7 +18,7 @@ export default {
     //步进器上监听事件
     countChange() {
       // console.log(this.$refs.numbox.value)
-      // console.log('ssssss')
+      console.log('ssssss')
       //每次修改完商品的数量，都把他更新到最新的state中
       this.$store.commit("updataGoodsInfo", {
         id: this.goodsid,
@@ -24,15 +26,18 @@ export default {
       });
     },
     //添加数量
-    add() {
-      this.$refs.numbox.value++;
+    add(goodsid) {
+      this.$store.commit("addnum",this.goodsid);
     },
     //减少数量
     del() {
-      if (this.$refs.numbox.value>1) {
-        this.$refs.numbox.value--;
-      }
+        this.$store.commit("delnum",this.goodsid);
     }
+  },
+  mounted(){
+    this.countChange
+    //  console.log(this.$refs.numbox.value)
+    console.log(this.$store.getters.getAllCount)
   }
 };
 </script>
